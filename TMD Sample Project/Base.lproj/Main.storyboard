@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TMD_Sample_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Hb-yB-BY4">
+                                <rect key="frame" x="65.5" y="64.5" width="51" height="31"/>
+                                <connections>
+                                    <action selector="switchValueChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="r7a-pH-08f"/>
+                                </connections>
+                            </switch>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PNG-cG-bgK">
+                                <rect key="frame" x="0.0" y="159" width="414" height="654"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="syncfilecell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="syncfilecell" id="ZMF-oB-UVb" customClass="PickerTableViewCell" customModule="TMD_Sample_Project" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZMF-oB-UVb" id="ney-cB-4Dw">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="syncfilecell"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TMD is off" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUi-zX-eca">
+                                <rect key="frame" x="318" y="68" width="80" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Us4-Ya-63g">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="UD3-ri-3oe"/>
+                                    <barButtonItem systemItem="rewind" id="4dP-qD-6oX">
+                                        <connections>
+                                            <action selector="previousDayWithSender:" destination="BYZ-38-t0r" id="ahv-Ra-n6P"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="l0c-vW-eC4"/>
+                                    <barButtonItem style="plain" systemItem="action" id="sOE-Q6-UZ9">
+                                        <connections>
+                                            <action selector="uploadDataWithSender:" destination="BYZ-38-t0r" id="aZV-df-NSj"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="vLg-I0-oi7"/>
+                                    <barButtonItem title="Today" style="plain" id="0pg-gi-RlW">
+                                        <connections>
+                                            <action selector="todayWithSender:" destination="BYZ-38-t0r" id="b3m-6H-dyt"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="5EX-EZ-Hsz"/>
+                                    <barButtonItem systemItem="refresh" id="MGj-qW-C9F">
+                                        <connections>
+                                            <action selector="refreshDataWithSender:" destination="BYZ-38-t0r" id="F11-22-swC"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="ktB-uL-eU3"/>
+                                    <barButtonItem systemItem="fastForward" id="pBG-uA-8ci">
+                                        <connections>
+                                            <action selector="nextDayWithSender:" destination="BYZ-38-t0r" id="e6W-Zv-m0r"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="l9C-A0-ebI"/>
+                                </items>
+                            </toolbar>
+                            <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="12/02/2019" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tPZ-O5-Ey4">
+                                <rect key="frame" x="65.5" y="103" width="94" height="34"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TMD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wvh-To-3F5">
+                                <rect key="frame" x="14" y="68" width="43.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ODb-M7-zvY">
+                                <rect key="frame" x="16" y="108" width="41.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Us4-Ya-63g" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="0cY-7w-TJM"/>
+                            <constraint firstItem="PNG-cG-bgK" firstAttribute="top" secondItem="ODb-M7-zvY" secondAttribute="bottom" constant="27" id="2Fb-c8-u7X"/>
+                            <constraint firstItem="wvh-To-3F5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="14" id="2fF-WF-ZXU"/>
+                            <constraint firstItem="ODb-M7-zvY" firstAttribute="top" secondItem="wvh-To-3F5" secondAttribute="bottom" constant="16" id="3cI-py-ymt"/>
+                            <constraint firstItem="PNG-cG-bgK" firstAttribute="leading" secondItem="Us4-Ya-63g" secondAttribute="leading" id="80C-Pr-rYa"/>
+                            <constraint firstItem="JUi-zX-eca" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="24" id="9C6-lK-XOD"/>
+                            <constraint firstItem="PNG-cG-bgK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="FxH-Kw-l2a"/>
+                            <constraint firstItem="tPZ-O5-Ey4" firstAttribute="top" secondItem="6Hb-yB-BY4" secondAttribute="bottom" constant="7.5" id="KAJ-7i-brz"/>
+                            <constraint firstItem="6Hb-yB-BY4" firstAttribute="leading" secondItem="wvh-To-3F5" secondAttribute="trailing" constant="8" id="KYJ-gL-Mgk"/>
+                            <constraint firstItem="tPZ-O5-Ey4" firstAttribute="leading" secondItem="ODb-M7-zvY" secondAttribute="trailing" constant="8" id="Peg-ec-yft"/>
+                            <constraint firstItem="ODb-M7-zvY" firstAttribute="centerY" secondItem="tPZ-O5-Ey4" secondAttribute="centerY" id="RES-D9-Dqm"/>
+                            <constraint firstItem="PNG-cG-bgK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="WaG-ec-AbY"/>
+                            <constraint firstItem="PNG-cG-bgK" firstAttribute="trailing" secondItem="Us4-Ya-63g" secondAttribute="trailing" id="ZEY-db-mii"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JUi-zX-eca" secondAttribute="trailing" constant="16" id="dhs-Yv-84G"/>
+                            <constraint firstItem="PNG-cG-bgK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="eFi-ja-2n4"/>
+                            <constraint firstItem="JUi-zX-eca" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Hb-yB-BY4" secondAttribute="trailing" constant="8" symbolic="YES" id="fpa-R6-QfB"/>
+                            <constraint firstItem="ODb-M7-zvY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="iPi-M9-C92"/>
+                            <constraint firstItem="6Hb-yB-BY4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20.5" id="jnh-Ub-YEc"/>
+                            <constraint firstItem="PNG-cG-bgK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jxn-xG-H3R"/>
+                            <constraint firstItem="6Hb-yB-BY4" firstAttribute="leading" secondItem="wvh-To-3F5" secondAttribute="trailing" constant="8" id="ke6-GV-Jy0"/>
+                            <constraint firstItem="ODb-M7-zvY" firstAttribute="top" secondItem="wvh-To-3F5" secondAttribute="bottom" constant="16" id="lNc-13-bEf"/>
+                            <constraint firstItem="wvh-To-3F5" firstAttribute="centerY" secondItem="6Hb-yB-BY4" secondAttribute="centerY" id="mAB-bT-5Dn"/>
+                            <constraint firstItem="Us4-Ya-63g" firstAttribute="top" secondItem="PNG-cG-bgK" secondAttribute="bottom" id="pW7-XT-Ldr"/>
+                            <constraint firstItem="wvh-To-3F5" firstAttribute="trailing" secondItem="ODb-M7-zvY" secondAttribute="trailing" id="pfQ-Cp-B0E"/>
+                            <constraint firstItem="wvh-To-3F5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="24" id="rLD-7W-rVT"/>
+                            <constraint firstItem="Us4-Ya-63g" firstAttribute="top" secondItem="PNG-cG-bgK" secondAttribute="bottom" id="sjG-Lx-FTN"/>
+                            <constraint firstItem="PNG-cG-bgK" firstAttribute="top" secondItem="tPZ-O5-Ey4" secondAttribute="bottom" constant="22" id="uQ6-RX-ndv"/>
+                            <constraint firstItem="tPZ-O5-Ey4" firstAttribute="leading" secondItem="6Hb-yB-BY4" secondAttribute="leading" id="wUv-Ll-H7K"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="dateTextField" destination="tPZ-O5-Ey4" id="Gme-TS-E1a"/>
+                        <outlet property="tableview" destination="PNG-cG-bgK" id="S6G-fs-ZH9"/>
+                        <outlet property="tmdStatusLabel" destination="JUi-zX-eca" id="YEq-2C-bw8"/>
+                        <outlet property="tmdSwitch" destination="6Hb-yB-BY4" id="67q-nL-Kko"/>
+                        <outlet property="toolbar" destination="Us4-Ya-63g" id="AUQ-uT-wZk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5.5999999999999996" y="135.38230884557723"/>
+        </scene>
+    </scenes>
+</document>
