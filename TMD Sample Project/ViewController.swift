@@ -171,7 +171,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "syncfilecell", for: indexPath)
-        let activity = activities[indexPath.item]
+        let activity = self.activities[indexPath.row]
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "HH:mm"
         let ts = Double(activity.timestampStart) / 1000.0
@@ -224,21 +224,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return cacheTask;
             }.continueOnSuccessWith { (task) -> Any? in
                 TMDCloudApi.fetchData(self.currentDate).continueWith { (task) -> Any? in
-                    self.activities.removeAll()
-                    if let arr = task.result {
-                        for activity in (arr as! [TMDActivity]) {
-                            self.activities.append(activity)
-                        }
-                    }
-                    else if task.error != nil {
-                        for activity in cachedActivities {
-                            self.activities.append(activity)
-                        }
-                    }
-
-                    NSLog("We got %d activities for date: %@", self.activities.count,
-                          self.dateFormatter.string(from: self.currentDate))
                     DispatchQueue.main.async{
+                        self.activities.removeAll()
+                        if let arr = task.result {
+                            for activity in (arr as! [TMDActivity]) {
+                                self.activities.append(activity)
+                            }
+                        }
+                        else if task.error != nil {
+                            for activity in cachedActivities {
+                                self.activities.append(activity)
+                            }
+                        }
+                        
+                        NSLog("We got %d activities for date: %@", self.activities.count,
+                              self.dateFormatter.string(from: self.currentDate))
                         self.tableview.reloadData()
                     }
                     return task;

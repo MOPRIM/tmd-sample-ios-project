@@ -138,7 +138,6 @@
                         <outlet property="tableview" destination="PNG-cG-bgK" id="S6G-fs-ZH9"/>
                         <outlet property="tmdStatusLabel" destination="JUi-zX-eca" id="YEq-2C-bw8"/>
                         <outlet property="tmdSwitch" destination="6Hb-yB-BY4" id="67q-nL-Kko"/>
-                        <outlet property="toolbar" destination="Us4-Ya-63g" id="AUQ-uT-wZk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
