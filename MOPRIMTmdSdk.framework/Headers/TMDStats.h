@@ -24,7 +24,22 @@ NS_ASSUME_NONNULL_BEGIN
 /// The duration in seconds of the activity
 @property (assign) NSTimeInterval duration;
 
-- (instancetype)initWithActivity:(NSString *)activity co2:(double)co2 distance:(double)distance duration:(NSTimeInterval)duration;
+/// The average amount of CO2 (in grams)  for the community for this activity
+@property (assign) double communityCo2;
+
+/// The average distance in meters for the community for this activity
+@property (assign) double communityDistance;
+
+/// The average duration in seconds for the community for this activity
+@property (assign) NSTimeInterval communityDuration;
+
+- (instancetype)initWithActivity:(NSString *)activity
+                             co2:(double)co2
+                        distance:(double)distance
+                        duration:(NSTimeInterval)duration
+                    communityCo2:(double)communityCo2
+               communityDistance:(double)communityDistance
+               communityDuration:(NSTimeInterval)communityDuration;
 
 @end
 

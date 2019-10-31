@@ -20,10 +20,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /*! @brief Fetch TMD activity data from the Moprim Cloud for the defined date
- * @param date the date
+ * @param date the date (only the day, month, year components are relevant)
+ * @param offset Number of minutes after midnight that indicates the start of the day. (example: if you want data for the day and consider that days should be separated at 4AM instead of midnight, set this parameter to 240.0.
+ * Set this parameter to 0.0 if you want days to be separated at midnight.
  * @return A list of TMD activities if successful, an error otherwise.
  */
-+ (TMDTask<NSArray<TMDActivity *> *> *) fetchData:(NSDate *)date;
++ (TMDTask<NSArray<TMDActivity *> *> *) fetchData:(NSDate *)date minutesOffset:(double)offset;
 
 /*! @brief Fetch TMD activity data from the Moprim Cloud between two timestamps
  * @param start the start time (timestamp in ms)
@@ -35,10 +37,12 @@ NS_ASSUME_NONNULL_BEGIN
 /** Fetch TMD activity data from the cache for the defined date
  *
  * Use this method if you wish not to request data from the cloud
- * @param date the date
+ * @param date the date (only the day, month, year components are relevant)
+ * @param offset Number of minutes after midnight that indicates the start of the day. (example: if you want data for the day and consider that days should be separated at 4AM instead of midnight, set this parameter to 240.0.
+ * Set this parameter to 0.0 if you want days to be separated at midnight.
  * @return A list of TMD activities if successful, an error otherwise.
  */
-+ (TMDTask<NSArray<TMDActivity *> *> *) fetchDataFromCache:(NSDate *)date NS_SWIFT_NAME(fetchDataFromCache(_:));
++ (TMDTask<NSArray<TMDActivity *> *> *) fetchDataFromCache:(NSDate *)date minutesOffset:(double)offset NS_SWIFT_NAME(fetchDataFromCache(_:minutesOffset:));
 
 /** Fetch TMD activity data from the cache between two timestamps
  *

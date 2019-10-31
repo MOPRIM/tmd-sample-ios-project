@@ -13,6 +13,7 @@ import MOPRIMTmdSdk
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let didInitializeTMD = NSNotification.Name(rawValue: "TMD.didInitialize")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -31,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 NSLog("Error at TMD init:%@", error.localizedDescription)
             } else if let result = task.result {
                 NSLog("Successfully initialized the TMD with id %@", result as! String)
+                NotificationCenter.default.post(name: self.didInitializeTMD, object: nil)
             }
             return task;
         })
@@ -72,5 +74,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
     }
 
+    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+        TMD.application(application, handleEventsForBackgroundURLSession: identifier, completionHandler: completionHandler)
+    }
 }
 

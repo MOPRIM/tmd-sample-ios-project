@@ -11,8 +11,11 @@ typedef NS_ENUM(NSInteger, TMDErrorType) {
     /// Triggered when the network operation was not successful
     TMDCouldNotConnectToTheInternet,
     
-    /// Triggered the SDK key is invalid
+    /// Triggered when the SDK key is invalid
     TMDSdkKeyInvalid,
+    
+    /// Triggered when the SDK was not initialized properly before using it
+    TMDSdkNotInitialized,
     
     /// The SDK endpoint is invalid, in this condition the SDK cannot operate
     TMDSdkEndpointInvalid,
@@ -60,5 +63,24 @@ typedef NS_ENUM(NSInteger, TMDErrorType) {
     TMDAlreadyStopped,
     
     /// Triggered when the user does not allow sufficient access to location service (i.e., AuthorizedAlways)
-    TMDLocationServicePermissionUnsufficient
+    TMDLocationServicePermissionInsufficient,
+    
+    /// Triggered when location services are disabled on the device
+    TMDLocationServicesDisabled,
+    
+    /// Triggered when monitoring significant location change is not available on the device
+    TMDSignificantlocationChangeMonitoringUnavailable,
+    
+    /// Triggered when the device doesn't provide accelerometer data
+    TMDAccelerometerUnavailable,
+    
+    /// Triggered when Fitness Tracking is disabled from the phone's settings
+    TMDFitnessTrackingDisabled,
+
+    /// Triggered when the user denied the app access to Fitness Tracking
+    TMDFitnessTrackingUnauthorized,
+    
+    /// Triggered when the device doesn't provide motion activity data
+    TMDMotionActivityUnavailable
+
 };

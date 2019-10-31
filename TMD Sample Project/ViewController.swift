@@ -32,8 +32,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var tmdSwitch: UISwitch!
     @IBOutlet weak var tmdStatusLabel: UILabel!
-    @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet var tableview: UITableView!
+    @IBOutlet weak var dateButton: UIButton!
     
     // MARK: - IBActions
     
@@ -48,60 +48,65 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func today(sender: UIBarButtonItem) {
-        self.refreshControl.beginRefreshing()
-        self.currentDate = Date()
-        dateTextField.text = dateFormatter.string(from: self.currentDate)
-        NSLog("Go to today: %@", dateFormatter.string(from: self.currentDate))
-        updateViewForCurrentDate()
-        self.refreshControl.endRefreshing()
+        updateDate(Date())
     }
     
     @IBAction func previousDay(sender: UIBarButtonItem) {
-        self.refreshControl.beginRefreshing()
-        self.currentDate.addTimeInterval(-60 * 60 * 24)
-        dateTextField.text = dateFormatter.string(from: self.currentDate)
-        NSLog("Go to previous day: %@", dateFormatter.string(from: self.currentDate))
-        updateViewForCurrentDate()
-        self.refreshControl.endRefreshing()
+        updateDate(self.currentDate.addingTimeInterval(-60 * 60 * 24))
     }
     
     @IBAction func nextDay(sender: UIBarButtonItem) {
-        self.refreshControl.beginRefreshing()
-        self.currentDate.addTimeInterval(60 * 60 * 24)
-        dateTextField.text = dateFormatter.string(from: self.currentDate)
-        NSLog("Go to next day: %@", dateFormatter.string(from: self.currentDate))
-        updateViewForCurrentDate()
-        self.refreshControl.endRefreshing()
+        updateDate(self.currentDate.addingTimeInterval(60 * 60 * 24))
     }
     
+    func updateDate(_ newDate:Date){
+        self.currentDate = newDate
+        dateButton.setTitle(dateFormatter.string(from: self.currentDate), for: .normal)
+        NSLog("Go to day: %@", dateFormatter.string(from: self.currentDate))
+        updateViewForCurrentDate()
+    }
+    
+    @IBAction func showDatePicker(_ sender: Any) {
+        if let datePickerController = self.storyboard!.instantiateViewController(withIdentifier: "DatePickerController") as? DatePickerController {
+            datePickerController.delegate = self
+            datePickerController.date = self.currentDate
+            datePickerController.modalPresentationStyle = .popover
+            datePickerController.preferredContentSize = CGSize(width: 270, height: 140)
+            if let popover = datePickerController.popoverPresentationController{
+                popover.delegate = self
+                popover.permittedArrowDirections = .up
+                popover.sourceView = self.dateButton!
+                popover.sourceRect = CGRect(x: self.dateButton!.frame.width/2, y: self.dateButton!.frame.height, width: 0, height: 0)
+            }
+            self.present(datePickerController, animated: true, completion: nil)
+        }
+    }
     @IBAction func uploadData(sender: UIBarButtonItem) {
         NSLog("Uploading data")
-        DispatchQueue.global(qos: .userInitiated).async {
-            TMDCloudApi.uploadData().continueWith { (task) -> Any? in
-                DispatchQueue.main.async {
-                    let alert : UIAlertController
-                    if let error = task.error {
-                        NSLog("Error while uploading: %@", error.localizedDescription)
-                        alert = UIAlertController.init(title: "Upload Error", message: error.localizedDescription, preferredStyle: .alert)
-                    }
-                    else if let metadata = task.result {
-                        if (metadata.nbLocations + metadata.nbTmdSequences == 0) {
-                            NSLog("Nothing to upload")
-                            alert = UIAlertController.init(title: "Nothing to upload", message: nil, preferredStyle: .alert)
-                        }
-                        else {
-                            alert = UIAlertController.init(title: "Upload success", message: nil, preferredStyle: .alert)
-                            NSLog("Successfully uploading: %@", metadata.description())
-                        }
+        TMDCloudApi.uploadData().continueWith { (task) -> Any? in
+            DispatchQueue.main.async {
+                let alert : UIAlertController
+                if let error = task.error {
+                    NSLog("Error while uploading: %@", error.localizedDescription)
+                    alert = UIAlertController.init(title: "Upload Error", message: error.localizedDescription, preferredStyle: .alert)
+                }
+                else if let metadata = task.result {
+                    if (metadata.nbLocations + metadata.nbTmdSequences == 0) {
+                        NSLog("Nothing to upload")
+                        alert = UIAlertController.init(title: "Nothing to upload", message: nil, preferredStyle: .alert)
                     }
                     else {
-                        alert = UIAlertController.init(title: "Upload Error", message: "No metadata was returned", preferredStyle: .alert)
+                        alert = UIAlertController.init(title: "Upload success", message: nil, preferredStyle: .alert)
+                        NSLog("Successfully uploading: %@", metadata.description())
                     }
-                    alert.addAction(UIAlertAction.init(title: "OK", style: .default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
                 }
-                return nil;
+                else {
+                    alert = UIAlertController.init(title: "Upload Error", message: "No metadata was returned", preferredStyle: .alert)
+                }
+                alert.addAction(UIAlertAction.init(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
+            return nil;
         }
     }
     
@@ -137,7 +142,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         // Configure Refresh Control
         self.refreshControl.addTarget(self, action: #selector(refreshTableData(_:)), for: .valueChanged)
-        dateTextField.text = dateFormatter.string(from: currentDate)
+        dateButton.setTitle(dateFormatter.string(from: self.currentDate), for: .normal)
+
+        if (TMD.isInitialized()){
+            updateViewForCurrentDate()
+        }
+        else {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            NotificationCenter.default.addObserver(self, selector: #selector(self.didInitTMD(notification:)), name: appDelegate.didInitializeTMD, object: nil)
+        }
+    }
+    
+    @objc func didInitTMD(notification: Notification){
+        NSLog("didInitTMD")
         updateViewForCurrentDate()
     }
     
@@ -170,7 +187,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "syncfilecell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ModalityCell", for: indexPath)
         let activity = self.activities[indexPath.row]
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "HH:mm"
@@ -208,22 +225,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         else if (!enable && self.tmdSwitch.isOn) {
             self.tmdSwitch.setOn(false, animated: true)
-            DispatchQueue.main.async{
-                self.tableview.reloadData()
-            }
+            self.tableview.reloadData()
         }
     }
     
     func updateViewForCurrentDate() {
+        if (TMD.isInitialized() == false) {
+            return
+        }
         var cachedActivities: [TMDActivity] = [];
-        TMDCloudApi.fetchDataFromCache(self.currentDate).continueOnSuccessWith { (cacheTask) -> Any? in
+        TMDCloudApi.fetchDataFromCache(self.currentDate, minutesOffset: 0.0).continueOnSuccessWith { (cacheTask) -> Any? in
             NSLog("Fetched cached activities")
             if let arr = cacheTask.result {
                 cachedActivities = (arr as! [TMDActivity])
             }
             return cacheTask;
             }.continueOnSuccessWith { (task) -> Any? in
-                TMDCloudApi.fetchData(self.currentDate).continueWith { (task) -> Any? in
+                TMDCloudApi.fetchData(self.currentDate, minutesOffset: 0.0).continueWith { (task) -> Any? in
                     DispatchQueue.main.async{
                         self.activities.removeAll()
                         if let arr = task.result {
@@ -323,10 +341,10 @@ extension ViewController: PickerTableCellDelegate {
         let cellRow = self.tableview.indexPath(for: cell)?.row ?? -1
         NSLog("Picked %@", String(pickerData[row].split(separator: "/").last ?? "unknown").uppercased())
         TMDCloudApi.correctActivity(activities[cellRow], withLabel: pickerData[row]).continueOnSuccessWith { (task) -> Any? in
-            if let activity = task.result {
-                NSLog("Activity %@", activity.activity())
-                self.activities[cellRow] = activity
-                DispatchQueue.main.async{
+            DispatchQueue.main.async{
+                if let activity = task.result {
+                    NSLog("Activity %@", activity.activity())
+                    self.activities[cellRow] = activity
                     self.tableview.reloadData()
                 }
             }
@@ -334,5 +352,17 @@ extension ViewController: PickerTableCellDelegate {
         }
         self.view.endEditing(true)
     }
-    
 }
+
+// MARK: - DatePicker Delegates
+extension ViewController: DatePickerDelegate {
+    func didPickDate(date: Date) {
+        updateDate(date)
+    }
+}
+extension ViewController: UIPopoverPresentationControllerDelegate{
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+}
+

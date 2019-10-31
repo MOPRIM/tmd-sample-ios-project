@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,7 @@
 		D657B2D322AFAAD800535DEA /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D657B2D222AFAAD800535DEA /* PickerTableViewCell.swift */; };
 		D657B2D522AFBA4400535DEA /* MOPRIMTmdSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D657B2D422AFBA4400535DEA /* MOPRIMTmdSdk.framework */; };
 		D657B2D622AFBA4400535DEA /* MOPRIMTmdSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D657B2D422AFBA4400535DEA /* MOPRIMTmdSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BF484223069F9200E23D96 /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BF484123069F9200E23D96 /* DatePickerController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,7 @@
 		D60CB52A22AFA9B30014B2A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D657B2D222AFAAD800535DEA /* PickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
 		D657B2D422AFBA4400535DEA /* MOPRIMTmdSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOPRIMTmdSdk.framework; sourceTree = "<group>"; };
+		D6BF484123069F9200E23D96 /* DatePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
 		D8DB155E643A4B217C65CD66 /* Pods-TMD Sample Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMD Sample Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TMD Sample Project/Pods-TMD Sample Project.debug.xcconfig"; sourceTree = "<group>"; };
 		DD965AE46CEE814741AD945F /* Pods-TMD Sample Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMD Sample Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-TMD Sample Project/Pods-TMD Sample Project.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +108,7 @@
 				D60CB52522AFA9B30014B2A4 /* Assets.xcassets */,
 				D60CB52722AFA9B30014B2A4 /* LaunchScreen.storyboard */,
 				D60CB52A22AFA9B30014B2A4 /* Info.plist */,
+				D6BF484123069F9200E23D96 /* DatePickerController.swift */,
 			);
 			path = "TMD Sample Project";
 			sourceTree = "<group>";
@@ -203,27 +206,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TMD Sample Project/Pods-TMD Sample Project-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AWSAPIGateway/AWSAPIGateway.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSCognito/AWSCognito.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProviderASF/AWSCognitoIdentityProviderASF.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
-				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TMD Sample Project/Pods-TMD Sample Project-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSAPIGateway.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognito.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProvider.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProviderASF.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TMD Sample Project/Pods-TMD Sample Project-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TMD Sample Project/Pods-TMD Sample Project-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TMD Sample Project/Pods-TMD Sample Project-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -234,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D60CB52122AFA9B20014B2A4 /* ViewController.swift in Sources */,
+				D6BF484223069F9200E23D96 /* DatePickerController.swift in Sources */,
 				D657B2D322AFAAD800535DEA /* PickerTableViewCell.swift in Sources */,
 				D60CB51F22AFA9B20014B2A4 /* AppDelegate.swift in Sources */,
 			);
@@ -395,7 +388,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "fi.moprim.tmd.TMD-Sample-Project";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "TMD Sample Project";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -419,7 +412,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "fi.moprim.tmd.TMD-Sample-Project";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "TMD Sample Project";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

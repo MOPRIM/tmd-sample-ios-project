@@ -63,12 +63,18 @@ NS_ASSUME_NONNULL_BEGIN
  * The state of the TMD after this call will be Off. */
 + (void) stop;
 
-/** Use this methods from your AppDelegate's performFetchWithCompletionHandler method in order for the app to update its data regularly in the background.
+/** Use this methods from your AppDelegate's performFetchWithCompletionHandler method in order for the TMD SDK to update its data regularly in the background.
  *
  * Use the returned value to make a UIBackgroundFetchResult value to pass to the completionHandler.
- * If you have to make your own background fetch as well, it is your responsibility to pass a suitable UIBackgroundFetchResult to the completion handler that would combine your background fetch result with the TMD's background fetch result.
+ * If you have to make your own background fetch as well, it is your responsibility to pass a suitable UIBackgroundFetchResult to the completion handler that would combine your background fetch result with the TMD SDK's background fetch result.
  * \returns a NSNumber containing an integer representing the UIBackgroundFetchResult rawValue */
 + (TMDTask<NSNumber*> *) backgroundFetch;
+
+/** Use this methods from your AppDelegate's handleEventsForBackgroundURLSession method in order for the TMD SDK to update its data regularly in the background.
+ *
+ * The identifier provided to this method will be used to check if the Background URL Session belongs to the TMD SDK or not. A call to this method will immediately return if the identifier does not belong to the TMD SDK.
+ * If your app is already using the AppDelegate's handleEventsForBackgroundURLSession method, you must use the identifier to check if the Background URL Session comes from your code. */
++ (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)(void))completionHandler;
 
 /// Set an object which adopts the TMDDelegate protocol as a delegate in order to receive events from the TMD.
 + (void) setDelegate:(id<TMDDelegate> _Nullable)delegate;

@@ -31,12 +31,24 @@ NS_ASSUME_NONNULL_BEGIN
 /// The last timestamp when location was synced with the cloud
 @property (assign) long long lastUploadedLocationTimestamp;
 
+/// The average daily co2 value for the community
+@property (assign) double communityDailyCo2;
+
+/// The average daily distance value for the community
+@property (assign) double communityDailyDistance;
+
+/// The average daily duration value for the community
+@property (assign) double communityDailyDuration;
+
 - (instancetype)initWithFirstTimestamp:(long long) firstTimestamp
                          lastTimestamp:(long long) lastTimestamp
                       lastTmdTimestamp:(long long) lastTmdTimestamp
                  lastLocationTimestamp:(long long) lastLocationTimestamp
               lastUploadedTmdTimestamp:(long long) lastUploadedTmdTimestamp
-         lastUploadedLocationTimestamp:(long long) lastUploadedLocationTimestamp;
+         lastUploadedLocationTimestamp:(long long) lastUploadedLocationTimestamp
+                     communityDailyCo2:(double) communityDailyCo2
+                communityDailyDistance:(double) communityDailyDistance
+                communityDailyDuration:(double) communityDailyDuration;
 
 /// JSON description of the object.
 - (NSString*) description;
