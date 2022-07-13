@@ -30,6 +30,6 @@ class DatePickerController: UIViewController {
     
 }
 
-protocol DatePickerDelegate: class {
+protocol DatePickerDelegate: AnyObject {
     func didPickDate(date:Date)
 }

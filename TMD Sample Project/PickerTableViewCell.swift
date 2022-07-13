@@ -73,7 +73,7 @@ extension PickerTableViewCell: UIPickerViewDataSource {
 }
 
 /// Hook of delegate of `UIPickerView`.
-public protocol PickerTableCellDelegate: class {
+public protocol PickerTableCellDelegate: AnyObject {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int, forCell cell: PickerTableViewCell) -> String?
     
@@ -92,7 +92,7 @@ public protocol PickerTableCellDelegate: class {
 }
 
 /// Hook of datasource of `UIPickerView`.
-public protocol PickerTableCellDataSource: class {
+public protocol PickerTableCellDataSource: AnyObject {
     
     func numberOfComponents(in pickerView: UIPickerView, forCell cell: PickerTableViewCell) -> Int
     

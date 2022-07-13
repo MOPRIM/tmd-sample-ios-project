@@ -8,14 +8,24 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
+#import <AWSS3/AWSS3.h>
+
 #import "TMDTask.h"
 #import "TMDDelegate.h"
+#import "TMDUploadDelegate.h"
+
+#import "TMDUserApiDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /** Use this class to initialize the TMD with initWithKey:withEndpoint: as soon as possible in your AppDelegate's didFinishLaunchingWithOptions method.*/
-@interface TMD : NSObject
+@interface TMD : NSObject <TMDUserApiDelegate>
+
+/// This is only useful if you need a reference to the TMD (in most cases, you won't, as all the methods exposed here are class methods)
++ (TMD *)sharedInstance;
+
++ (void)setCustomCredentialsProvider:(AWSCognitoCredentialsProvider*)provider;
++ (AWSCognitoCredentialsProvider*)credentialsProvider;
 
 /** Initialize the Moprim TMD.
  * 
@@ -25,6 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
  * @param launchOptions the launchOptions you get from your AppDelegate's didFinishLaunchingWithOptions method. Pass nil if launchOptions is not available.
  * The launchOptions parameter can be used to wake up the TMD when your app is being launched in the background (for example after a significant location change event).*/
 + (TMDTask *)initWithKey:(NSString *)key withEndpoint:(NSString *)endpoint withLaunchOptions:(NSDictionary* _Nullable)launchOptions;
+
+/// Prevents further calls to the Cloud API. To be called after signing out a user.
++ (void) clearConfig;
 
 /// \returns TRUE if the TMD has been properly initialized
 + (BOOL) isInitialized;
@@ -51,9 +64,23 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param uuid the unique user id
 + (void) setUUID:(nullable NSString *)uuid;
 
+/** Resets the credentials used for communications with the cloud, and returns a TMDTask object with a new installation Id.
+*
+* It is recommended to stop the TMD before calling this method.
+* @param key your API key
+* @param endpoint your API endpoint */
++ (TMDTask*) resetCredentialsWithKey:(NSString *)key withEndpoint:(NSString *)endpoint;
+
 /** Retrieve the unique application installation id of application using the SDK
  * \returns a TMDTask object containing the unique installation id*/
 + (TMDTask<NSString *> *) getInstallationId;
+
+/** Returns a string containing basic information about the last recorded data. Used for user feedback. */
++ (NSString *)getDataInfo;
+
+/** Returns an array of string indicating which sensors are missing.
+ * See TMDSensors for possible values. */
++ (NSArray<NSString*>*)checkForMissingSensors;
 
 /** Starts the TMD service
  * The state of the TMD after this call will be On, and either idle or running. */
@@ -62,6 +89,11 @@ NS_ASSUME_NONNULL_BEGIN
 /** Stops the TMD service
  * The state of the TMD after this call will be Off. */
 + (void) stop;
+
+
+/** Use this methods from your AppDelegate's applicationWillTerminate method in order for the TMD SDK to prepare for the app termination.
+*/
++ (void)applicationWillTerminate;
 
 /** Use this methods from your AppDelegate's performFetchWithCompletionHandler method in order for the TMD SDK to update its data regularly in the background.
  *
@@ -77,7 +109,31 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)(void))completionHandler;
 
 /// Set an object which adopts the TMDDelegate protocol as a delegate in order to receive events from the TMD.
-+ (void) setDelegate:(id<TMDDelegate> _Nullable)delegate;
++ (void)setDelegate:(id<TMDDelegate> _Nullable)delegate;
+
+/// Register a TMDUploadDelegate to be notified when an upload starts or ends.
++ (void)setUploadDelegate:(id<TMDUploadDelegate> _Nullable)delegate;
+
+/// Set to true in order to allow uploads on Mobile Data. By default, uploads on Mobile Data are disabled.
++ (void)setAllowUploadOnCellularNetwork:(bool)allow;
+
+/// Returns true if the TMD framework is allowed to perform uploads on Mobile Data. Returns false if uploads are only allowed on Wifi.
++ (BOOL)isUploadOnCellularNetworkAllowed;
+
+/// Set to true in order to allow the TMD framework to fetch new data automatically from the cloud shortly after a data upload. By default, auto fetch is disabled.
++ (void)setAllowAutoFetch:(bool)allow;
+
+/// Returns true if the TMD framework is allowed to fetch new data automatically from the cloud shortly after a data upload.
++ (BOOL)isAutoFetchAllowed;
+
+/// Returns the number of data files that are not uploaded yet.
++ (int)numberOfFilesLeftToUpload;
+/// Returns the date of the last file that has been created and that is still on the phone, or nil if no file is present.
++ (nullable NSDate*)lastDataFileCreationDate;
+/// Returns the date of the oldest file that has been created and that is still on the phone, or nil if no file is present.
++ (nullable NSDate*)oldestDataFileCreationDate;
+
++ (void)logString:(NSString*)string;
 
 @end
 

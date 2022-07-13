@@ -9,7 +9,7 @@
 import UIKit
 import MOPRIMTmdSdk
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TMDDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, TMDDelegate {
     
     // MARK: - Parameters
     
@@ -34,9 +34,115 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tmdStatusLabel: UILabel!
     @IBOutlet var tableview: UITableView!
     @IBOutlet weak var dateButton: UIButton!
+    @IBOutlet weak var requestLocationButton: UIButton!
     
-    // MARK: - IBActions
     
+    // MARK: - Requesting Location Access
+    
+    // Calling TMD.start() will request location access for you,
+    // but if you want to control how and when it is asked to the user,
+    // you can request location access before calling TMD.start().
+    
+    // The following code is an example of how we can ask the user to get the location access "Always" depending on iOS version.
+
+    var locationManager : CLLocationManager?
+    var didAskWhenInUseLocationAccess = false
+    var didAskAlwaysLocationAccess = false
+
+    @IBAction func requestLocationAccess(_ sender: Any) {
+        if (self.locationManager == nil){
+            self.locationManager = CLLocationManager()
+            self.locationManager?.delegate = self
+        }
+        if #available(iOS 13.0, *) {
+            // First we ask for "When in use", then we ask for "Always".
+            // Why we do that instead of asking straight for Always:
+            //     If we were to ask first for "Always",
+            //     the user will first be prompted to allow access "When in use",
+            //     and we cannot control when the user will be prompted for "Always".
+            //     By asking for "When in use" and then for "Always", we control when "Always" is asked.
+            
+            if didAskWhenInUseLocationAccess == false {
+                self.locationManager!.requestWhenInUseAuthorization()
+                didAskWhenInUseLocationAccess = true
+            }
+            else {
+                self.locationManager!.requestAlwaysAuthorization()
+                didAskAlwaysLocationAccess = true
+            }
+        }
+        else {
+            // Before iOS 13, we can directly ask for "Always"
+            self.locationManager!.requestAlwaysAuthorization()
+            didAskAlwaysLocationAccess = true
+        }
+    }
+    
+    // Should be used on iOS 14 and later versions:
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        if #available(iOS 14.0, *) {
+            let status = manager.authorizationStatus
+            didUpdateLocationAuthorizationStatus(authorizationStatus: status, precise: (manager.accuracyAuthorization == .fullAccuracy))
+        }
+    }
+    
+    // Should be used on iOS 13 and earlier versions:
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        didUpdateLocationAuthorizationStatus(authorizationStatus: status, precise: true)
+    }
+    
+    func didUpdateLocationAuthorizationStatus(authorizationStatus: CLAuthorizationStatus, precise:Bool){
+        
+        if (authorizationStatus == .notDetermined) {
+            NSLog("locationManager.didChangeAuthorization:notDetermined")
+        }
+        else if (authorizationStatus == .authorizedAlways){
+            NSLog("locationManager.didChangeAuthorization:authorizedAlways")
+            requestLocationButton.isEnabled = false
+            if (!precise){
+                let alert = UIAlertController.init(title: "Now please go to Settings and allow Precise location access.",
+                                                   message: "Settings > TMD Sample Project > Location > Precise Location",
+                                                   preferredStyle: .alert)
+                alert.addAction(UIAlertAction.init(title: NSLocalizedString("Go to Settings", comment: ""),
+                                                   style: .default,
+                                                   handler: {(alert: UIAlertAction!) in
+                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                }))
+                self.present(alert, animated: true, completion: nil)            }
+            else {
+                requestLocationButton.setTitle("Location Access Granted!", for: .normal)
+            }
+        }
+        else if (authorizationStatus == .denied || authorizationStatus == .restricted) {
+            NSLog("locationManager.didChangeAuthorization:restricted")
+        }
+        else {
+            NSLog("locationManager.didChangeAuthorization:\(authorizationStatus.rawValue)")
+            if #available(iOS 13.4, *) {
+                if (authorizationStatus == .authorizedWhenInUse){
+                    // Here, we can ask the user to "Change to Always Allow".
+                    // Note that requestAlwaysAuthorization() will do nothing if the user previously went to the settings to change the permission
+                    // And there is no way to know wether the user did that or not.
+                    self.locationManager!.requestAlwaysAuthorization()
+                    didAskAlwaysLocationAccess = true
+                }
+            }
+            else {
+                let alert = UIAlertController.init(title: "Now please go to Settings and allow location access Always.",
+                                                   message: "Settings > TMD Sample Project > Location > Always",
+                                                   preferredStyle: .alert)
+                alert.addAction(UIAlertAction.init(title: NSLocalizedString("Go to Settings", comment: ""),
+                                                   style: .default,
+                                                   handler: {(alert: UIAlertAction!) in
+                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    // MARK: - Starting and stopping TMD
+
     @IBAction func switchValueChanged(sender: UISwitch) {
         NSLog(sender.isOn ? "Switch On" : "Switch Off")
         if (sender.isOn) {
@@ -47,6 +153,66 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    // MARK: -
+
+    @objc func updateTmdStatusLabel() {
+        if TMD.isOff() {
+            tmdStatusLabel.text = "TMD is off"
+        }
+        else if TMD.isIdle() {
+            tmdStatusLabel.text = "TMD is idle"
+        }
+        else if TMD.isRunning() {
+            tmdStatusLabel.text = String(format: "TMD is running for %@",
+                                         secondsToString(seconds: TMD.getRunningTime()))
+        }
+    }
+    
+    // MARK: - TMDDelegate methods
+    
+    func didStart() {
+        NSLog("TMD service started (user motion is being monitored)")
+        updateSwitchState(true)
+        if timer.isValid {
+            timer.invalidate();
+        }
+        timer = Timer.scheduledTimer(timeInterval: 1,
+                                     target: self,
+                                     selector: #selector(self.updateTmdStatusLabel),
+                                     userInfo: nil, repeats: true)
+    }
+    
+    func didStop() {
+        NSLog("TMD service stopped (user motion is not being monitored)")
+        if timer.isValid {
+            timer.invalidate();
+        }
+        updateSwitchState(false)
+        updateTmdStatusLabel()
+    }
+    
+    func didNotStartWithError(_ error: Error!) {
+        NSLog("TMD service could not start with error %@", error.localizedDescription)
+        updateSwitchState(false)
+        updateTmdStatusLabel()
+    }
+    
+    func didStopWithError(_ error: Error!) {
+        NSLog("TMD service stopped with error %@", error.localizedDescription)
+        updateSwitchState(false)
+        updateTmdStatusLabel()
+    }
+    
+    func didStartAnalysing() {
+        NSLog("TMD service started analysing (user started moving)")
+    }
+    
+    func didStopAnalysing() {
+        NSLog("TMD service stopped analysing (user stopped moving)")
+    }
+    
+    // MARK: - Updating view for selected date
+
     @IBAction func today(sender: UIBarButtonItem) {
         updateDate(Date())
     }
@@ -81,6 +247,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             self.present(datePickerController, animated: true, completion: nil)
         }
     }
+    
+    @IBAction func refreshData(sender: UIBarButtonItem) {
+        NSLog("Refresh")
+        self.refreshControl.beginRefreshing()
+        updateViewForCurrentDate()
+        self.refreshControl.endRefreshing()
+    }
+    
+    // MARK: - Uploading data
+
     @IBAction func uploadData(sender: UIBarButtonItem) {
         NSLog("Uploading data")
         TMDCloudApi.uploadData().continueWith { (task) -> Any? in
@@ -110,12 +286,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    @IBAction func refreshData(sender: UIBarButtonItem) {
-        NSLog("Refresh")
-        self.refreshControl.beginRefreshing()
-        updateViewForCurrentDate()
-        self.refreshControl.endRefreshing()
-    }
     
     // MARK: - View lifecycle
     
@@ -265,52 +435,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    @objc func updateTmdStatusLabel() {
-        if TMD.isOff() {
-            tmdStatusLabel.text = "TMD is off"
-        }
-        else if TMD.isIdle() {
-            tmdStatusLabel.text = "TMD is idle"
-        }
-        else if TMD.isRunning() {
-            tmdStatusLabel.text = String(format: "TMD is running for %@",
-                                         secondsToString(seconds: TMD.getRunningTime()))
-        }
-    }
-    
-    func didStart() {
-        NSLog("TMD service started")
-        updateSwitchState(true)
-        if timer.isValid {
-            timer.invalidate();
-        }
-        timer = Timer.scheduledTimer(timeInterval: 1,
-                                     target: self,
-                                     selector: #selector(self.updateTmdStatusLabel),
-                                     userInfo: nil, repeats: true)
-    }
-    
-    func didStop() {
-        NSLog("TMD service stopped")
-        if timer.isValid {
-            timer.invalidate();
-        }
-        updateSwitchState(false)
-        updateTmdStatusLabel()
-    }
-    
-    func didNotStartWithError(_ error: Error!) {
-        NSLog("TMD service could not start with error %@", error.localizedDescription)
-        updateSwitchState(false)
-        updateTmdStatusLabel()
-    }
-    
-    func didStopWithError(_ error: Error!) {
-        NSLog("TMD service stopped with error %@", error.localizedDescription)
-        updateSwitchState(false)
-        updateTmdStatusLabel()
-    }
-    
 }
 
 // MARK: - PickerTableCellDataSource
@@ -365,4 +489,3 @@ extension ViewController: UIPopoverPresentationControllerDelegate{
         return UIModalPresentationStyle.none
     }
 }
-

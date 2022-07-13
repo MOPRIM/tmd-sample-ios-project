@@ -10,25 +10,30 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// A class that summarizes the results of an upload
+/// A class that summarizes the results of an upload.
 @interface TMDUploadMetadata : NSObject
 
-/// The upload timestamp of the last upload
+/// The upload timestamp of the last upload (in milliseconds).
 @property (assign) long long uploadTimestamp;
 
-/// The end timestamp of last activity that was just uploaded
+/// The end timestamp of last activity that was just uploaded (in milliseconds).
+/// Note: this was in seconds in versions prior to v0.6.0.
 @property (assign) long long lastTmdActivityTimestamp;
 
 /// The number of TMD sequences that were just uploaded
 @property (assign) NSInteger nbTmdSequences;
 
-/// The timestamp of the last location point that was just uploaded
+/// The timestamp of the last location point that was just uploaded (in milliseconds).
+/// Note: this was in seconds in versions prior to v0.6.0.
 @property (assign) long long lastLocationTimestamp;
 
-/// The number of location data points that were uploaded
+/// The number of location data points that were uploaded.
 @property (assign) NSInteger nbLocations;
 
-/// The number of activity corrections that were uploaded
+/// The number of modified trips that were uploaded.
+@property (assign) NSInteger nbTripUpdates;
+
+/// The number of activity corrections that were uploaded.
 @property (assign) NSInteger nbCorrections;
 
 /*! @brief Default constructor
@@ -37,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param nbTmdSequences                The number of TMD sequences that were just uploaded
  * @param lastLocationTimestamp         The timestamp of the last location point that was just uploaded
  * @param nbLocations                   The number of location data points that were uploaded
+ * @param nbTripUpdates                 The number of modified trips that were uploaded
  * @param nbCorrections                 The number of activity corrections that were uploaded
  */
 - (instancetype)initWithUploadTimestamp:(long long)uploadTimestamp
@@ -44,11 +50,15 @@ NS_ASSUME_NONNULL_BEGIN
                          nbTmdSequences:(NSInteger)nbTmdSequences
                   lastLocationTimestamp:(long long)lastLocationTimestamp
                             nbLocations:(NSInteger)nbLocations
+                          nbTripUpdates:(NSInteger)nbTripUpdates
                           nbCorrections:(NSInteger)nbCorrections;
 
+/*! 
+* @param uploadTimestamp               The upload timestamp of the last upload
+*/
 - (instancetype)initWithUploadTimestamp:(long long)uploadTimestamp;
 
-/// Default constructor when nothing was set
+/// Default constructor when nothing was set.
 - (instancetype)init;
 
 - (void)addLastTmdActivityTimestamp:(long long)lastTmdActivityTimestamp;
@@ -57,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addNbLocations:(NSInteger)nbLocations;
 - (void)addNbCorrections:(NSInteger)nbCorrections;
 
-/// JSON description of the metadata
+/// JSON description of the metadata.
 - (NSString*) description;
 
 @end

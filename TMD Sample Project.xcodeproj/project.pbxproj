@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,19 +14,34 @@
 		D60CB52622AFA9B30014B2A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D60CB52522AFA9B30014B2A4 /* Assets.xcassets */; };
 		D60CB52922AFA9B30014B2A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D60CB52722AFA9B30014B2A4 /* LaunchScreen.storyboard */; };
 		D657B2D322AFAAD800535DEA /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D657B2D222AFAAD800535DEA /* PickerTableViewCell.swift */; };
-		D657B2D522AFBA4400535DEA /* MOPRIMTmdSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D657B2D422AFBA4400535DEA /* MOPRIMTmdSdk.framework */; };
-		D657B2D622AFBA4400535DEA /* MOPRIMTmdSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D657B2D422AFBA4400535DEA /* MOPRIMTmdSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BD91B7287D789A002E9C83 /* AWSCognitoIdentityProvider.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BD91B2287D789A002E9C83 /* AWSCognitoIdentityProvider.xcframework */; };
+		D6BD91B8287D789A002E9C83 /* AWSCognitoIdentityProvider.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6BD91B2287D789A002E9C83 /* AWSCognitoIdentityProvider.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BD91B9287D789A002E9C83 /* AWSS3.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BD91B3287D789A002E9C83 /* AWSS3.xcframework */; };
+		D6BD91BA287D789A002E9C83 /* AWSS3.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6BD91B3287D789A002E9C83 /* AWSS3.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BD91BB287D789A002E9C83 /* AWSCognitoIdentityProviderASF.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BD91B4287D789A002E9C83 /* AWSCognitoIdentityProviderASF.xcframework */; };
+		D6BD91BC287D789A002E9C83 /* AWSCognitoIdentityProviderASF.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6BD91B4287D789A002E9C83 /* AWSCognitoIdentityProviderASF.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BD91BD287D789A002E9C83 /* AWSAPIGateway.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BD91B5287D789A002E9C83 /* AWSAPIGateway.xcframework */; };
+		D6BD91BE287D789A002E9C83 /* AWSAPIGateway.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6BD91B5287D789A002E9C83 /* AWSAPIGateway.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BD91BF287D789A002E9C83 /* AWSCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BD91B6287D789A002E9C83 /* AWSCore.xcframework */; };
+		D6BD91C0287D789A002E9C83 /* AWSCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6BD91B6287D789A002E9C83 /* AWSCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BD91C3287D789D002E9C83 /* MOPRIMTmdSdk.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6BD91C2287D789D002E9C83 /* MOPRIMTmdSdk.xcframework */; };
+		D6BD91C4287D789D002E9C83 /* MOPRIMTmdSdk.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6BD91C2287D789D002E9C83 /* MOPRIMTmdSdk.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6BF484223069F9200E23D96 /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BF484123069F9200E23D96 /* DatePickerController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D657B2D722AFBA4400535DEA /* Embed Frameworks */ = {
+		D6BD91C1287D789A002E9C83 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D657B2D622AFBA4400535DEA /* MOPRIMTmdSdk.framework in Embed Frameworks */,
+				D6BD91C4287D789D002E9C83 /* MOPRIMTmdSdk.xcframework in Embed Frameworks */,
+				D6BD91BC287D789A002E9C83 /* AWSCognitoIdentityProviderASF.xcframework in Embed Frameworks */,
+				D6BD91C0287D789A002E9C83 /* AWSCore.xcframework in Embed Frameworks */,
+				D6BD91B8287D789A002E9C83 /* AWSCognitoIdentityProvider.xcframework in Embed Frameworks */,
+				D6BD91BA287D789A002E9C83 /* AWSS3.xcframework in Embed Frameworks */,
+				D6BD91BE287D789A002E9C83 /* AWSAPIGateway.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -44,6 +59,12 @@
 		D60CB52A22AFA9B30014B2A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D657B2D222AFAAD800535DEA /* PickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
 		D657B2D422AFBA4400535DEA /* MOPRIMTmdSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOPRIMTmdSdk.framework; sourceTree = "<group>"; };
+		D6BD91B2287D789A002E9C83 /* AWSCognitoIdentityProvider.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSCognitoIdentityProvider.xcframework; path = XCFrameworks/AWS_XCFrameworks/AWSCognitoIdentityProvider.xcframework; sourceTree = "<group>"; };
+		D6BD91B3287D789A002E9C83 /* AWSS3.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSS3.xcframework; path = XCFrameworks/AWS_XCFrameworks/AWSS3.xcframework; sourceTree = "<group>"; };
+		D6BD91B4287D789A002E9C83 /* AWSCognitoIdentityProviderASF.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSCognitoIdentityProviderASF.xcframework; path = XCFrameworks/AWS_XCFrameworks/AWSCognitoIdentityProviderASF.xcframework; sourceTree = "<group>"; };
+		D6BD91B5287D789A002E9C83 /* AWSAPIGateway.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSAPIGateway.xcframework; path = XCFrameworks/AWS_XCFrameworks/AWSAPIGateway.xcframework; sourceTree = "<group>"; };
+		D6BD91B6287D789A002E9C83 /* AWSCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSCore.xcframework; path = XCFrameworks/AWS_XCFrameworks/AWSCore.xcframework; sourceTree = "<group>"; };
+		D6BD91C2287D789D002E9C83 /* MOPRIMTmdSdk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MOPRIMTmdSdk.xcframework; path = XCFrameworks/MOPRIMTmdSdk.xcframework; sourceTree = "<group>"; };
 		D6BF484123069F9200E23D96 /* DatePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
 		D8DB155E643A4B217C65CD66 /* Pods-TMD Sample Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMD Sample Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TMD Sample Project/Pods-TMD Sample Project.debug.xcconfig"; sourceTree = "<group>"; };
 		DD965AE46CEE814741AD945F /* Pods-TMD Sample Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMD Sample Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-TMD Sample Project/Pods-TMD Sample Project.release.xcconfig"; sourceTree = "<group>"; };
@@ -54,8 +75,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6BD91BD287D789A002E9C83 /* AWSAPIGateway.xcframework in Frameworks */,
+				D6BD91B7287D789A002E9C83 /* AWSCognitoIdentityProvider.xcframework in Frameworks */,
+				D6BD91BF287D789A002E9C83 /* AWSCore.xcframework in Frameworks */,
+				D6BD91BB287D789A002E9C83 /* AWSCognitoIdentityProviderASF.xcframework in Frameworks */,
+				D6BD91B9287D789A002E9C83 /* AWSS3.xcframework in Frameworks */,
+				D6BD91C3287D789D002E9C83 /* MOPRIMTmdSdk.xcframework in Frameworks */,
 				5C9994FB8E2E6FA314EDA61C /* Pods_TMD_Sample_Project.framework in Frameworks */,
-				D657B2D522AFBA4400535DEA /* MOPRIMTmdSdk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +100,12 @@
 		6F5ADF320EB8B6BF1C68EC4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D6BD91C2287D789D002E9C83 /* MOPRIMTmdSdk.xcframework */,
+				D6BD91B5287D789A002E9C83 /* AWSAPIGateway.xcframework */,
+				D6BD91B2287D789A002E9C83 /* AWSCognitoIdentityProvider.xcframework */,
+				D6BD91B4287D789A002E9C83 /* AWSCognitoIdentityProviderASF.xcframework */,
+				D6BD91B6287D789A002E9C83 /* AWSCore.xcframework */,
+				D6BD91B3287D789A002E9C83 /* AWSS3.xcframework */,
 				D657B2D422AFBA4400535DEA /* MOPRIMTmdSdk.framework */,
 				0B14FDBB2338F388886E33B6 /* Pods_TMD_Sample_Project.framework */,
 			);
@@ -124,8 +156,7 @@
 				D60CB51722AFA9B20014B2A4 /* Sources */,
 				D60CB51822AFA9B20014B2A4 /* Frameworks */,
 				D60CB51922AFA9B20014B2A4 /* Resources */,
-				DD6F8C7BD20BB1C6836FFB06 /* [CP] Embed Pods Frameworks */,
-				D657B2D722AFBA4400535DEA /* Embed Frameworks */,
+				D6BD91C1287D789A002E9C83 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -143,7 +174,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1340;
 				ORGANIZATIONNAME = moprim;
 				TargetAttributes = {
 					D60CB51A22AFA9B20014B2A4 = {
@@ -199,23 +230,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DD6F8C7BD20BB1C6836FFB06 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TMD Sample Project/Pods-TMD Sample Project-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TMD Sample Project/Pods-TMD Sample Project-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TMD Sample Project/Pods-TMD Sample Project-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -280,6 +294,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -341,6 +356,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

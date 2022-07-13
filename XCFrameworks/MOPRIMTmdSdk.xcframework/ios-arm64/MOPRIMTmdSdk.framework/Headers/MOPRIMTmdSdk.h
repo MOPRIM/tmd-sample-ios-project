@@ -23,4 +23,12 @@ FOUNDATION_EXPORT const unsigned char MOPRIMTmdSdkVersionString[];
 #import <MOPRIMTmdSdk/TMDStats.h>
 #import <MOPRIMTmdSdk/TMDCloudMetadata.h>
 #import <MOPRIMTmdSdk/TMDErrorType.h>
+#import <MOPRIMTmdSdk/TMDSensors.h>
+#import <MOPRIMTmdSdk/TMDNotifications.h>
 #import <MOPRIMTmdSdk/TMDDelegate.h>
+#import <MOPRIMTmdSdk/TMDUserApiDelegate.h>
+
+#import <MOPRIMTmdSdk/TMDTrip.h>
+#import <MOPRIMTmdSdk/TMDStatus.h>
+#import <MOPRIMTmdSdk/TMDUploadDelegate.h>
+#import <MOPRIMTmdSdk/TMDTripNotification.h>

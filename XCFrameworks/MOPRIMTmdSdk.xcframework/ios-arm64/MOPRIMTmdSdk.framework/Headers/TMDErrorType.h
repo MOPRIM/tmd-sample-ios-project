@@ -16,7 +16,10 @@ typedef NS_ENUM(NSInteger, TMDErrorType) {
     
     /// Triggered when the SDK was not initialized properly before using it
     TMDSdkNotInitialized,
-    
+
+    /// Triggered when calling TMD.init before signing in a user with TMDUserApi
+    TMDSdkEndpointRequiresSigningIn,
+
     /// The SDK endpoint is invalid, in this condition the SDK cannot operate
     TMDSdkEndpointInvalid,
     
@@ -47,6 +50,9 @@ typedef NS_ENUM(NSInteger, TMDErrorType) {
     /// Triggered when Cloud returned an error for a specified request path
     TMDRequestErrorForPath,
     
+    /// Triggered when Cloud returned a 404 not found error
+    TMDRequestErrorNotFound,
+
     /// Triggered when the Cloud is not responsive or has internal error
     TMDCloudStatusCodeNotOk,
     
@@ -79,6 +85,9 @@ typedef NS_ENUM(NSInteger, TMDErrorType) {
 
     /// Triggered when the user denied the app access to Fitness Tracking
     TMDFitnessTrackingUnauthorized,
+
+    /// Triggered when the app did not request Fitness tracking
+    TMDFitnessTrackingNotDetermined,
     
     /// Triggered when the device doesn't provide motion activity data
     TMDMotionActivityUnavailable

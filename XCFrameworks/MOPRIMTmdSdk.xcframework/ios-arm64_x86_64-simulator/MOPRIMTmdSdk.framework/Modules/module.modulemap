@@ -1,0 +1,6 @@
+framework module MOPRIMTmdSdk {
+  umbrella header "MOPRIMTmdSdk.h"
+
+  export *
+  module * { export * }
+}

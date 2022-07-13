@@ -25,6 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// The UTC timestamp (in ms) of the end of the TMD activity
 @property (assign) long long timestampEnd;
 
+/// The UTC timestamp (in ms) of the last update of the TMD activity
+@property (assign) long long timestampUpdate;
+
 /// The corrected label of the activity
 @property (nonatomic, strong) NSString *correctedActivity;
 
@@ -52,21 +55,27 @@ NS_ASSUME_NONNULL_BEGIN
 /// The metadata annotated to the TMD activity
 @property (nonatomic, strong) NSString *metadata;
 
+/// Indicates whether the activity was either validated or corrected by the user
+@property BOOL verifiedByUser;
+
 /// Indicates whether change made manually on the activity have been synced with the cloud
 @property BOOL syncedWithCloud;
 
 - (instancetype)initWithId:(long long)activityId timestampDownload:(long long)timestampDownload
-        timestampStart:(long long)timestampStart timestampEnd:(long long)timestampEnd
+        timestampStart:(long long)timestampStart timestampEnd:(long long)timestampEnd timestampUpdate:(long long)timestampUpdate
       originalActivity:(NSString *)originalActivity correctedActivity:(nullable NSString *)correctedActivity
                    co2:(double)co2 distance:(double)distance speed:(double)speed
               polyline:(NSString *)polyline origin:(nullable NSString *)origin destination:(nullable NSString *)destination
-              metadata:(nullable NSString *)metadata synced:(BOOL)syncedWithCloud;
+              metadata:(nullable NSString *)metadata verifiedByUser:(BOOL)verifiedByUser synced:(BOOL)syncedWithCloud;
 
 
 /** Returns TRUE if the activity has same start and stop timestamp than 'other'
  *
  * Activities are usually compared with their timestamps.*/
 - (BOOL)hasSameTimestampsThanActivity:(TMDActivity *)other;
+
+/// Compares 2 TMDActivity objects, ignoring activityId, timestampDownload, timestampUpdate and syncedWithCloud
+- (BOOL)hasSameDataThanActivity:(TMDActivity *)other;
 
 /// Returns TRUE if the timestamps of both activities overlap
 - (BOOL)overlapsWithActivity:(TMDActivity *)other isInclusive:(BOOL)isInclusive;
