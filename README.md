@@ -9,11 +9,10 @@ For more information, read the [SDK documentation](http://www-tmd-sdk-documentat
 - Move the following XCFrameworks into `XCFrameworks/AWS_XCFrameworks`:
 
 ```
-AWSCore.xcframeworkAWSS3.xcframeworkAWSCognitoIdentityProviderASF.xcframeworkAWSCognitoIdentityProvider.xcframeworkAWSAPIGateway.xcframework
-```
+AWSAPIGateway.xcframework
+AWSCognitoIdentityProviderASF.xcframeworkAWSCognitoIdentityProvider.xcframeworkAWSCore.xcframeworkAWSS3.xcframework```
 
-- Run `pod install` from the root directory.
-- Open the **.xcworkspace** file.
+- Open **TMD Sample Project.xcodeproj**.
 - Set `myKey` and `myEndpoint` in **AppDelegate.swift**.
 - You're good to go!
 

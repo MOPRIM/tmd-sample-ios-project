@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5C9994FB8E2E6FA314EDA61C /* Pods_TMD_Sample_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B14FDBB2338F388886E33B6 /* Pods_TMD_Sample_Project.framework */; };
 		D60CB51F22AFA9B20014B2A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60CB51E22AFA9B20014B2A4 /* AppDelegate.swift */; };
 		D60CB52122AFA9B20014B2A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60CB52022AFA9B20014B2A4 /* ViewController.swift */; };
 		D60CB52422AFA9B20014B2A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D60CB52222AFA9B20014B2A4 /* Main.storyboard */; };
@@ -49,7 +48,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0B14FDBB2338F388886E33B6 /* Pods_TMD_Sample_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMD_Sample_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D60CB51B22AFA9B20014B2A4 /* TMD Sample Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TMD Sample Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D60CB51E22AFA9B20014B2A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D60CB52022AFA9B20014B2A4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,8 +64,6 @@
 		D6BD91B6287D789A002E9C83 /* AWSCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AWSCore.xcframework; path = XCFrameworks/AWS_XCFrameworks/AWSCore.xcframework; sourceTree = "<group>"; };
 		D6BD91C2287D789D002E9C83 /* MOPRIMTmdSdk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MOPRIMTmdSdk.xcframework; path = XCFrameworks/MOPRIMTmdSdk.xcframework; sourceTree = "<group>"; };
 		D6BF484123069F9200E23D96 /* DatePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
-		D8DB155E643A4B217C65CD66 /* Pods-TMD Sample Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMD Sample Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TMD Sample Project/Pods-TMD Sample Project.debug.xcconfig"; sourceTree = "<group>"; };
-		DD965AE46CEE814741AD945F /* Pods-TMD Sample Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMD Sample Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-TMD Sample Project/Pods-TMD Sample Project.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,22 +77,12 @@
 				D6BD91BB287D789A002E9C83 /* AWSCognitoIdentityProviderASF.xcframework in Frameworks */,
 				D6BD91B9287D789A002E9C83 /* AWSS3.xcframework in Frameworks */,
 				D6BD91C3287D789D002E9C83 /* MOPRIMTmdSdk.xcframework in Frameworks */,
-				5C9994FB8E2E6FA314EDA61C /* Pods_TMD_Sample_Project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3139D09531F0433764BCF842 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				D8DB155E643A4B217C65CD66 /* Pods-TMD Sample Project.debug.xcconfig */,
-				DD965AE46CEE814741AD945F /* Pods-TMD Sample Project.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		6F5ADF320EB8B6BF1C68EC4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,7 +93,6 @@
 				D6BD91B6287D789A002E9C83 /* AWSCore.xcframework */,
 				D6BD91B3287D789A002E9C83 /* AWSS3.xcframework */,
 				D657B2D422AFBA4400535DEA /* MOPRIMTmdSdk.framework */,
-				0B14FDBB2338F388886E33B6 /* Pods_TMD_Sample_Project.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -117,7 +102,6 @@
 			children = (
 				D60CB51D22AFA9B20014B2A4 /* TMD Sample Project */,
 				D60CB51C22AFA9B20014B2A4 /* Products */,
-				3139D09531F0433764BCF842 /* Pods */,
 				6F5ADF320EB8B6BF1C68EC4E /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -152,7 +136,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D60CB52D22AFA9B30014B2A4 /* Build configuration list for PBXNativeTarget "TMD Sample Project" */;
 			buildPhases = (
-				381CC36919DFECC8074F4BFB /* [CP] Check Pods Manifest.lock */,
 				D60CB51722AFA9B20014B2A4 /* Sources */,
 				D60CB51822AFA9B20014B2A4 /* Frameworks */,
 				D60CB51922AFA9B20014B2A4 /* Resources */,
@@ -212,27 +195,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		381CC36919DFECC8074F4BFB /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TMD Sample Project-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D60CB51722AFA9B20014B2A4 /* Sources */ = {
@@ -388,7 +350,6 @@
 		};
 		D60CB52E22AFA9B30014B2A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D8DB155E643A4B217C65CD66 /* Pods-TMD Sample Project.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -412,7 +373,6 @@
 		};
 		D60CB52F22AFA9B30014B2A4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD965AE46CEE814741AD945F /* Pods-TMD Sample Project.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
